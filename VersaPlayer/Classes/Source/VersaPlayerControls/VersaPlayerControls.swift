@@ -102,6 +102,7 @@ open class VersaPlayerControls: View {
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if handler.isPlaying {
+            handler.playbackDelegate?.controlsWillHide(sender: nil)
             behaviour.hide()
         }
     }
@@ -274,6 +275,7 @@ open class VersaPlayerControls: View {
         self.checkOwnershipOf(object: notification.object, completion: self.playPauseButton?.set(active: false))
         self.handler.isPlaying = false
         if self.behaviour.controls.isHidden {
+            self.handler.playbackDelegate?.controlsWillShow(sender: nil)
             self.behaviour.show()
         }
       }

@@ -102,9 +102,11 @@ open class VersaPlayerControlsCoordinator: View, VersaPlayerGestureRecieverViewD
     open func didTap(at point: CGPoint) {
         if controls.behaviour.showingControls {
             if player.isPlaying {
+                player.playbackDelegate?.controlsWillHide(sender: nil)
                 controls.behaviour.hide()
             }
         }else {
+            player.playbackDelegate?.controlsWillShow(sender: nil)
             controls.behaviour.show()
         }
     }

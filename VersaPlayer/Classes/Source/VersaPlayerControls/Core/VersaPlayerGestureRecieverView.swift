@@ -25,12 +25,6 @@ open class VersaPlayerGestureRecieverView: View {
     /// Double tap UITapGestureRecognizer
     public var doubleTapGesture: NSClickGestureRecognizer? = nil
     
-    /// UIPanGestureRecognizer
-    public var panGesture: NSPanGestureRecognizer? = nil
-    
-    /// UIPinchGestureRecognizer
-    public var pinchGesture: NSMagnificationGestureRecognizer? = nil
-    
     /// Whether or not reciever view is ready
     public var ready: Bool = false
     
@@ -109,12 +103,6 @@ open class VersaPlayerGestureRecieverView: UIView {
     /// Double tap UITapGestureRecognizer
     public var doubleTapGesture: UITapGestureRecognizer? = nil
     
-    /// UIPanGestureRecognizer
-    public var panGesture: UIPanGestureRecognizer? = nil
-    
-    /// UIPinchGestureRecognizer
-    public var pinchGesture: UIPinchGestureRecognizer? = nil
-    
     /// Whether or not reciever view is ready
     public var ready: Bool = false
     
@@ -153,14 +141,8 @@ open class VersaPlayerGestureRecieverView: UIView {
         
         tapGesture?.require(toFail: doubleTapGesture!)
         
-        pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchHandler(with:)))
-        panGesture = UIPanGestureRecognizer(target: self, action: #selector(panHandler(with:)))
-        panGesture?.minimumNumberOfTouches = 1
-        
         addGestureRecognizer(tapGesture!)
         addGestureRecognizer(doubleTapGesture!)
-        addGestureRecognizer(panGesture!)
-        addGestureRecognizer(pinchGesture!)
     }
     
     
@@ -171,20 +153,6 @@ open class VersaPlayerGestureRecieverView: UIView {
     @objc open func doubleTapHandler(with sender: UITapGestureRecognizer) {
         delegate?.didDoubleTap(at: sender.location(in: self))
     }
-    
-    @objc open func pinchHandler(with sender: UIPinchGestureRecognizer) {
-        if sender.state == .ended {
-            delegate?.didPinch(with: sender.scale)
-        }
-    }
-    
-    @objc open func panHandler(with sender: UIPanGestureRecognizer) {
-        if sender.state == .began {
-            panGestureInitialPoint = sender.location(in: self)
-        }
-        delegate?.didPan(with: sender.translation(in: self), initially: panGestureInitialPoint)
-    }
-    
 }
 
 #else
@@ -198,12 +166,6 @@ open class VersaPlayerGestureRecieverView: UIView {
     
     /// UITapGestureRecognizer
     public var tapGesture: UITapGestureRecognizer? = nil
-    
-    /// UIPanGestureRecognizer
-    public var swipeGestureUp: UISwipeGestureRecognizer? = nil
-    public var swipeGestureDown: UISwipeGestureRecognizer? = nil
-    public var swipeGestureLeft: UISwipeGestureRecognizer? = nil
-    public var swipeGestureRight: UISwipeGestureRecognizer? = nil
     
     /// Whether or not reciever view is ready
     public var ready: Bool = false
@@ -252,24 +214,8 @@ open class VersaPlayerGestureRecieverView: UIView {
         playPause.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue)]
         playPause.numberOfTapsRequired = 1
         
-        swipeGestureUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeHandler(with:)))
-        swipeGestureUp?.direction = UISwipeGestureRecognizer.Direction.up
-        
-        swipeGestureDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeHandler(with:)))
-        swipeGestureDown?.direction = UISwipeGestureRecognizer.Direction.down
-        
-        swipeGestureLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeHandler(with:)))
-        swipeGestureLeft?.direction = UISwipeGestureRecognizer.Direction.left
-        
-        swipeGestureRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeHandler(with:)))
-        swipeGestureRight?.direction = UISwipeGestureRecognizer.Direction.right
-        
         addGestureRecognizer(tapGesture!)
         addGestureRecognizer(playPause)
-        addGestureRecognizer(swipeGestureUp!)
-        addGestureRecognizer(swipeGestureDown!)
-        addGestureRecognizer(swipeGestureLeft!)
-        addGestureRecognizer(swipeGestureRight!)
     }
     
     @objc private func togglePlayback() {

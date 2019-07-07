@@ -11,6 +11,10 @@ import AVFoundation
 
 public protocol VersaPlayerPlaybackDelegate: class {
     
+    func controlsWillHide(sender: Any?)
+    
+    func controlsWillShow(sender: Any?)
+    
     /// Notifies when playback time changes
     ///
     /// - Parameters:
@@ -97,6 +101,10 @@ public protocol VersaPlayerPlaybackDelegate: class {
 
 public extension VersaPlayerPlaybackDelegate {
 
+    func controlsWillHide(sender: Any?) { }
+    
+    func controlsWillShow(sender: Any?) { }
+    
     func timeDidChange(player: VersaPlayer, to time: CMTime) { }
 
     func playbackShouldBegin(player: VersaPlayer) -> Bool {
