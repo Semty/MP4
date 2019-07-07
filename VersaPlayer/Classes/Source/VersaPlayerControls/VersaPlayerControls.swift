@@ -88,7 +88,9 @@ open class VersaPlayerControls: View {
     #if os(macOS)
     
     open override func touchesBegan(with event: NSEvent) {
-        behaviour.hide()
+        if handler.isPlaying {
+            behaviour.hide()
+        }
     }
     
     override open func viewDidMoveToSuperview() {
@@ -99,7 +101,9 @@ open class VersaPlayerControls: View {
     #else
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        behaviour.hide()
+        if handler.isPlaying {
+            behaviour.hide()
+        }
     }
     
     open override func didMoveToSuperview() {
@@ -268,6 +272,10 @@ open class VersaPlayerControls: View {
       NotificationCenter.default.addObserver(forName: VersaPlayer.VPlayerNotificationName.didEnd.notification, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
         guard let self = self else { return }
         self.checkOwnershipOf(object: notification.object, completion: self.playPauseButton?.set(active: false))
+        self.handler.isPlaying = false
+        if self.behaviour.controls.isHidden {
+            self.behaviour.show()
+        }
       }
       NotificationCenter.default.addObserver(forName: VersaPlayer.VPlayerNotificationName.play.notification, object: nil, queue: OperationQueue.main) { [weak self]  (notification) in
         guard let self = self else { return }

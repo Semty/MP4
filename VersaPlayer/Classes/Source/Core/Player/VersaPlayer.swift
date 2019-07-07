@@ -63,6 +63,10 @@ open class VersaPlayer: AVPlayer, AVAssetResourceLoaderDelegate {
             return
         }
         NotificationCenter.default.post(name: VersaPlayer.VPlayerNotificationName.play.notification, object: self, userInfo: nil)
+        if (super.currentTime().value/10000000*10) == endTime().value {
+            super.seek(to: CMTime(seconds: 0,
+                                  preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
+        }
         super.play()
         handler.playbackDelegate?.playbackDidBegin(player: self)
     }
