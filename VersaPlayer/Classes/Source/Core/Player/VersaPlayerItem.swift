@@ -7,6 +7,7 @@
 //
 
 import AVFoundation
+import UIKit
 
 open class VersaPlayerItem: AVPlayerItem {
     
@@ -30,6 +31,39 @@ open class VersaPlayerItem: AVPlayerItem {
           print("8 \(String(describing: self))")
       #endif
     }
+    
+    public func takeSnapshot(completionHandler: ((_ image: UIImage?, _ error: Error?) -> Void)? ) {
+        
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
+        
+        imageGenerator.generateCGImagesAsynchronously(forTimes: [NSValue(time: currentTime())]) { (requestedTime, image, actualTime, result, error) in
+            if let image = image {
+                switch result {
+                case .succeeded:
+                    let uiimage = UIImage(cgImage: image)
+                    DispatchQueue.main.async {
+                        completionHandler?(uiimage, nil)
+                    }
+                    break
+                case .failed:
+                    fallthrough
+                case .cancelled:
+                    fallthrough
+                @unknown default:
+                    DispatchQueue.main.async {
+                        completionHandler?(nil, nil)
+                    }
+                    break
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completionHandler?(nil, error)
+                }
+            }
+        }
+    }
+
 
     private func tracks(for characteristic: AVMediaCharacteristic) -> [VersaPlayerMediaTrack] {
         guard let group = asset.mediaSelectionGroup(forMediaCharacteristic: characteristic) else {
