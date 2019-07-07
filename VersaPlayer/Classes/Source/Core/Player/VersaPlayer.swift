@@ -63,7 +63,20 @@ open class VersaPlayer: AVPlayer, AVAssetResourceLoaderDelegate {
             return
         }
         NotificationCenter.default.post(name: VersaPlayer.VPlayerNotificationName.play.notification, object: self, userInfo: nil)
-        if (super.currentTime().value/10000000*10) == endTime().value {
+        
+        let currentTimeString = "\(super.currentTime().value)"
+        let currentTimeOffset = currentTimeString.count > 6 ? 6 : currentTimeString.count
+        let currentTime =
+            Int(currentTimeString[..<currentTimeString.index(currentTimeString.startIndex,
+                                                             offsetBy: currentTimeOffset)]) ?? 0
+        
+        let endTimeString = "\(self.endTime().value)"
+        let endTimeOffset = endTimeString.count > 6 ? 6 : endTimeString.count
+        let endTime =
+            Int(endTimeString[..<endTimeString.index(endTimeString.startIndex,
+                                                     offsetBy: endTimeOffset)]) ?? 0
+        
+        if currentTime >= endTime {
             super.seek(to: CMTime(seconds: 0,
                                   preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
         }
