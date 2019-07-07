@@ -32,38 +32,22 @@ open class VersaPlayerItem: AVPlayerItem {
       #endif
     }
     
-    public func takeSnapshot(completionHandler: ((_ image: UIImage?, _ error: Error?) -> Void)? ) {
-        
-        let imageGenerator = AVAssetImageGenerator(asset: asset)
-        imageGenerator.appliesPreferredTrackTransform = true
-        
-        imageGenerator.generateCGImagesAsynchronously(forTimes: [NSValue(time: currentTime())]) { (requestedTime, image, actualTime, result, error) in
-            if let image = image {
-                switch result {
-                case .succeeded:
-                    let uiimage = UIImage(cgImage: image)
-                    DispatchQueue.main.async {
-                        completionHandler?(uiimage, nil)
-                    }
-                    break
-                case .failed:
-                    fallthrough
-                case .cancelled:
-                    fallthrough
-                @unknown default:
-                    DispatchQueue.main.async {
-                        completionHandler?(nil, nil)
-                    }
-                    break
-                }
-            } else {
-                DispatchQueue.main.async {
-                    completionHandler?(nil, error)
-                }
-            }
-        }
+    public func snapshot() throws -> UIImage? {
+        return try screenshotCMTime(cmTime: currentTime())?.0
     }
-
+    
+    private func screenshotCMTime(cmTime: CMTime) throws -> (UIImage, photoTime: CMTime)? {
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        
+        var timePicture = CMTime.zero
+        imageGenerator.appliesPreferredTrackTransform = true
+        imageGenerator.requestedTimeToleranceAfter = CMTime.zero
+        imageGenerator.requestedTimeToleranceBefore = CMTime.zero
+        
+        let ref = try imageGenerator.copyCGImage(at: cmTime, actualTime: &timePicture)
+        let viewImage: UIImage = UIImage(cgImage: ref)
+        return (viewImage, timePicture)
+    }
 
     private func tracks(for characteristic: AVMediaCharacteristic) -> [VersaPlayerMediaTrack] {
         guard let group = asset.mediaSelectionGroup(forMediaCharacteristic: characteristic) else {
