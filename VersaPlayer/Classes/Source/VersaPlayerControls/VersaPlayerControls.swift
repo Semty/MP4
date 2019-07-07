@@ -270,15 +270,17 @@ open class VersaPlayerControls: View {
           self.checkOwnershipOf(object: notification.object, completion: self.timeDidChange(toTime: time))
         }
       }
-      NotificationCenter.default.addObserver(forName: VersaPlayer.VPlayerNotificationName.didEnd.notification, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
-        guard let self = self else { return }
-        self.checkOwnershipOf(object: notification.object, completion: self.playPauseButton?.set(active: false))
-        self.handler.isPlaying = false
-        if self.behaviour.controls.isHidden {
-            self.handler.playbackDelegate?.controlsWillShow(sender: nil)
-            self.behaviour.show()
+        NotificationCenter.default.addObserver(forName: VersaPlayer.VPlayerNotificationName.didEnd.notification, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
+            guard let self = self else { return }
+            self.checkOwnershipOf(object: notification.object, completion: self.playPauseButton?.set(active: false))
+            self.handler.isPlaying = false
+            if self.behaviour.controls.isHidden {
+                self.handler.playbackDelegate?.controlsWillShow(sender: nil)
+                self.behaviour.show()
+            }
+            self.handler.player.seek(to: CMTime(seconds: 0,
+                                                preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
         }
-      }
       NotificationCenter.default.addObserver(forName: VersaPlayer.VPlayerNotificationName.play.notification, object: nil, queue: OperationQueue.main) { [weak self]  (notification) in
         guard let self = self else { return }
         self.checkOwnershipOf(object: notification.object, completion: self.playPauseButton?.set(active: true))
