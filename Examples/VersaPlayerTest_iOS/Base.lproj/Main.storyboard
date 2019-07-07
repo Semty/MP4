@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QWu-nh-ZH7">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="VersaPlayerTest_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3e-eD-wlf" customClass="VersaPlayerView" customModule="VersaPlayer">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ba5-ea-DPF" customClass="VersaPlayerControls" customModule="VersaPlayer">
+                                        <rect key="frame" x="0.0" y="517" width="375" height="150"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dr5-Gp-YxF" customClass="VersaTimeLabel" customModule="VersaPlayer">
+                                                <rect key="frame" x="16" y="25" width="48" height="30"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="akZ-EL-AVA"/>
+                                                    <constraint firstAttribute="width" constant="48" id="l2i-be-eLV"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAb-aI-xHr" customClass="VersaTimeLabel" customModule="VersaPlayer">
+                                                <rect key="frame" x="311" y="25" width="48" height="30"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="Bxj-RZ-AMR"/>
+                                                    <constraint firstAttribute="height" constant="30" id="eKH-Ay-mmV"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <slider opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="M2x-so-48O" customClass="VersaSeekbarSlider" customModule="VersaPlayer">
+                                                <rect key="frame" x="70" y="24" width="235" height="31"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="lw3-6W-V5s"/>
+                                                </constraints>
+                                            </slider>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eF-sc-Pwn" customClass="VersaStatefulButton" customModule="VersaPlayer">
+                                                <rect key="frame" x="162.5" y="76" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="3UG-PS-89v"/>
+                                                    <constraint firstAttribute="width" secondItem="5eF-sc-Pwn" secondAttribute="height" multiplier="1:1" id="6tK-6F-9pj"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="activeImage" value="pause"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="inactiveImage" value="play"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="WAb-aI-xHr" firstAttribute="leading" secondItem="M2x-so-48O" secondAttribute="trailing" constant="8" id="C6k-vR-wyG"/>
+                                            <constraint firstAttribute="height" constant="150" id="Hhz-wF-tR3"/>
+                                            <constraint firstItem="M2x-so-48O" firstAttribute="leading" secondItem="Dr5-Gp-YxF" secondAttribute="trailing" constant="8" id="JNc-mS-SH8"/>
+                                            <constraint firstItem="5eF-sc-Pwn" firstAttribute="top" secondItem="WAb-aI-xHr" secondAttribute="bottom" constant="21" id="KAd-Hr-DMS"/>
+                                            <constraint firstItem="Dr5-Gp-YxF" firstAttribute="leading" secondItem="VzA-Gn-4gQ" secondAttribute="leading" constant="16" id="P4R-U8-rzD"/>
+                                            <constraint firstItem="5eF-sc-Pwn" firstAttribute="top" secondItem="M2x-so-48O" secondAttribute="bottom" constant="22" id="Pep-Ul-M1F"/>
+                                            <constraint firstItem="VzA-Gn-4gQ" firstAttribute="trailing" secondItem="WAb-aI-xHr" secondAttribute="trailing" constant="16" id="ZZ8-uD-hIY"/>
+                                            <constraint firstItem="5eF-sc-Pwn" firstAttribute="top" secondItem="Dr5-Gp-YxF" secondAttribute="bottom" constant="21" id="cRD-2p-CEX"/>
+                                            <constraint firstItem="5eF-sc-Pwn" firstAttribute="bottom" secondItem="ba5-ea-DPF" secondAttribute="bottom" constant="-24" id="itE-x9-YM2"/>
+                                            <constraint firstItem="5eF-sc-Pwn" firstAttribute="centerX" secondItem="ba5-ea-DPF" secondAttribute="centerX" id="rwl-3R-1ZC"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="safeArea" id="VzA-Gn-4gQ"/>
+                                        <connections>
+                                            <outlet property="currentTimeLabel" destination="Dr5-Gp-YxF" id="VO9-rk-C5H"/>
+                                            <outlet property="playPauseButton" destination="5eF-sc-Pwn" id="0JC-X1-lTn"/>
+                                            <outlet property="seekbarSlider" destination="M2x-so-48O" id="o80-t3-ZFn"/>
+                                            <outlet property="totalTimeLabel" destination="WAb-aI-xHr" id="S9d-zf-h2o"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="ba5-ea-DPF" firstAttribute="leading" secondItem="N3e-eD-wlf" secondAttribute="leading" id="DvI-Wo-m8W"/>
+                                    <constraint firstAttribute="trailing" secondItem="ba5-ea-DPF" secondAttribute="trailing" id="Naz-p1-nmC"/>
+                                    <constraint firstAttribute="bottom" secondItem="ba5-ea-DPF" secondAttribute="bottom" id="XbK-UA-LiP"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="bufferingView" destination="Dxy-Vo-wVu" id="JwC-oH-5GN"/>
+                                </connections>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Dxy-Vo-wVu">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="N3e-eD-wlf" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="EeS-Pe-Dmh"/>
+                            <constraint firstItem="Dxy-Vo-wVu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KzY-dd-Hrh"/>
+                            <constraint firstItem="N3e-eD-wlf" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="hZf-Sq-jxF"/>
+                            <constraint firstItem="Dxy-Vo-wVu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="sci-ct-FAg"/>
+                            <constraint firstItem="N3e-eD-wlf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="tDS-R0-pl9"/>
+                            <constraint firstItem="N3e-eD-wlf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="y1E-cx-DGY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="uKX-um-jvv">
+                        <barButtonItem key="backBarButtonItem" title="Close" id="4So-z4-Uxr"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="controls" destination="ba5-ea-DPF" id="5eL-Ok-ev0"/>
+                        <outlet property="playerView" destination="N3e-eD-wlf" id="VnU-ux-4Nb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079.2" y="132.68365817091455"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HhR-eT-lFh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QWu-nh-ZH7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="jVG-06-Z6r">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5kL-zv-waj" kind="relationship" relationship="rootViewController" id="AsE-ec-XGe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cRW-8V-8qi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-572" y="133"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="h4j-1W-nLz">
+            <objects>
+                <viewController id="5kL-zv-waj" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oe5-Zj-K05">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHh-J4-mOP">
+                                <rect key="frame" x="147" y="318.5" width="81" height="30"/>
+                                <state key="normal" title="Show Video">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="47c-57-EwR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dHh-J4-mOP" firstAttribute="centerX" secondItem="oe5-Zj-K05" secondAttribute="centerX" id="T6j-Sj-OLn"/>
+                            <constraint firstItem="dHh-J4-mOP" firstAttribute="centerY" secondItem="oe5-Zj-K05" secondAttribute="centerY" id="vdc-lt-CPt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rRj-Zb-Irs"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="YKC-e0-PbS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aES-8P-NK9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="298" y="133"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="pause" width="48" height="48"/>
+        <image name="play" width="48" height="48"/>
+    </resources>
+</document>
