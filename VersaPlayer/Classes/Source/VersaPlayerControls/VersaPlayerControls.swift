@@ -100,13 +100,6 @@ open class VersaPlayerControls: View {
     
     #else
     
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if handler.isPlaying {
-            handler.playbackDelegate?.controlsWillHide(sender: nil)
-            behaviour.hide()
-        }
-    }
-    
     open override func didMoveToSuperview() {
         super.didMoveToSuperview()
         layoutInSuperview()
